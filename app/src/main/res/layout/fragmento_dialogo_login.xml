@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+    <TextView
+        android:text="Introduce tu nickname:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="25dp"
+        android:paddingTop="15dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Nickname"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:id="@+id/nickname"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nickname"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:text="Facil"
+            android:layout_width="wrap_content"
+            android:checked="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioFacil"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Medio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioMEdio"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Dificil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioDificil"
+            android:layout_weight="1" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingTop="15dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="15dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="JUGAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/jugar"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="VOLVER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/volver"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</RelativeLayout>
