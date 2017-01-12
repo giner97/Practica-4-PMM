@@ -110,7 +110,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
         protected Integer doInBackground(Integer... params) {
 
             int i;
-            for(i=0;i<100;i++){
+            for(i=0;i<101;i++){
 
                 publishProgress(i);
                 SystemClock.sleep(params[0]);
@@ -139,6 +139,11 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
 
+            for(int i=0;i<numeros.size();i++){
+
+                botones.get(i).setEnabled(false);
+
+            }
             DialogoGameOver fragmentoGameOver = DialogoGameOver.newInstance(nicknameTextView.getText().toString(), nivelFase);
             fragmentoGameOver.setFragmentoGameOverListener(SecondActivity.this);
             fragmentoGameOver.show(getFragmentManager(),null);
@@ -192,8 +197,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
     @Override
     public void llamaTarea(int dificultad, int masDificultad) {
 
-        int tiempo=dificultad*20;
-        //tiempo = tiempo-masDificultad;
+        int tiempo=dificultad*20-masDificultad;
 
         //Ejecutamos la tarea
             tarea = new TareaBotones();

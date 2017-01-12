@@ -3,7 +3,7 @@
     android:layout_width="wrap_content" android:layout_height="wrap_content">
 
     <TextView
-        android:text="Introduce tu nickname:"
+        android:text="@string/dimeNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Nickname"
+        android:hint="@string/nickname"
         android:ems="10"
         android:layout_marginTop="10dp"
         android:id="@+id/nickname"
@@ -34,7 +34,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:text="Facil"
+            android:text="@string/facil"
             android:layout_width="wrap_content"
             android:checked="true"
             android:layout_height="wrap_content"
@@ -42,14 +42,14 @@
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="Medio"
+            android:text="@string/medio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radioMEdio"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="Dificil"
+            android:text="@string/dificil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radioDificil"

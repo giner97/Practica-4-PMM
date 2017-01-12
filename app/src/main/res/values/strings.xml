@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">PMM_Practica_4_AlvaroGiner</string>
     <string name="titulo">Los Botones Locos</string>
+    <string name="_0_100">0/100</string>
+    <string name="nivel">Nivel 1</string>
+    <string name="nickname">Nickname</string>
+    <string name="dimeNickname">Introduce tu nickname:</string>
+    <string name="facil">Facil</string>
+    <string name="medio">Medio</string>
+    <string name="dificil">Dificil</string>
 </resources>

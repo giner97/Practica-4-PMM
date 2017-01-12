@@ -12,7 +12,7 @@
     tools:context="com.example.giner.pmm_practica_4_alvaroginer.SecondActivity">
 
     <TextView
-        android:text="Los Botones Locos"
+        android:text="@string/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="35dp"
@@ -76,7 +76,7 @@
             android:id="@+id/progressBar" />
 
         <TextView
-            android:text="0/100"
+            android:text="@string/_0_100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -84,7 +84,7 @@
             android:id="@+id/carga" />
 
         <TextView
-            android:text="Nivel 1"
+            android:text="@string/nivel"
             android:layout_width="match_parent"
             android:textSize="30dp"
             android:textColor="@android:color/holo_green_light"
