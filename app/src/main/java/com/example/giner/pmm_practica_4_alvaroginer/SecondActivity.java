@@ -1,5 +1,7 @@
 package com.example.giner.pmm_practica_4_alvaroginer;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class SecondActivity extends AppCompatActivity implements AdapterView.OnClickListener, FragmentoLogin.FragmentoLoginListener{
+public class SecondActivity extends AppCompatActivity implements AdapterView.OnClickListener, FragmentoLogin.FragmentoLoginListener, DialogoGameOver.FragmentoGameOverListener{
 
     private TextView nicknameTextView;
     private TareaBotones tarea;
@@ -25,6 +27,9 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
     private ArrayList <Integer> numeros;
     private ProgressBar barraDeCarga;
     private TextView numCarga;
+    private int nivelFase=1;
+    private int aumentoDificultad=0;
+    private TextView level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +44,9 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
             numeros.add(3);
             numeros.add(4);
 
-         //Creamos una instancia de la clase fragmentoLogin
-            FragmentoLogin alertDialogLogin = new FragmentoLogin();
+        //Llamamos al metodo llamaLogin para mostrar el dialogo del login
 
-        //No dejamos que se cierre el dialogo con back
-            alertDialogLogin.setCancelable(false);
-
-        //Nos suscribimos al evento FragmentoDialogoListener
-            alertDialogLogin.setFragmentoLoginListener(this);
-
-        //Mostramos el dialogo del login.
-            alertDialogLogin.show(getFragmentManager(),null);
+            llamaLogin();
 
         //Instanciamos los objetos
             nicknameTextView = (TextView)findViewById(R.id.nickname);
@@ -59,6 +56,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
             botones.add((Button)findViewById(R.id.button4));
             barraDeCarga = (ProgressBar)findViewById(R.id.progressBar);
             numCarga = (TextView)findViewById(R.id.carga);
+            level = (TextView)findViewById(R.id.level);
 
         //OnClickListener de los botones
 
@@ -67,6 +65,29 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
                 botones.get(i).setOnClickListener(this);
 
             }
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        Button botonPresionado = (Button) v;
+        if(Integer.parseInt(botonPresionado.getText().toString())==contadorBotones){
+            botonPresionado.setEnabled(false);
+            contadorBotones++;
+
+            if(contadorBotones==5){
+
+                tarea.cancel(false);
+                contadorBotones=1;
+                nivelFase++;
+                aumentoDificultad++;
+                llamaTarea(numDificultad,aumentoDificultad);
+
+            }
+
+        }
 
     }
 
@@ -78,6 +99,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
 
             //Reiniciamos los widgets
 
+            level.setText("Nivel "+nivelFase);
             numerarBotones(numeros);
             barraDeCarga.setProgress(0);
             numCarga.setText(String.valueOf("0/100"));
@@ -88,7 +110,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
         protected Integer doInBackground(Integer... params) {
 
             int i;
-            for(i=0;i<101;i++){
+            for(i=0;i<100;i++){
 
                 publishProgress(i);
                 SystemClock.sleep(params[0]);
@@ -117,32 +139,34 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
 
-            Toast.makeText(SecondActivity.this,"Aqui llega", Toast.LENGTH_SHORT).show();
+            DialogoGameOver fragmentoGameOver = DialogoGameOver.newInstance(nicknameTextView.getText().toString(), nivelFase);
+            fragmentoGameOver.setFragmentoGameOverListener(SecondActivity.this);
+            fragmentoGameOver.show(getFragmentManager(),null);
+            fragmentoGameOver.setCancelable(false);
+
 
         }
     }
 
+    //Metodo que llama al dialogo del login
 
-    @Override
-    public void onClick(View v) {
+        public void llamaLogin(){
 
-        Button botonPresionado = (Button) v;
-        if(Integer.parseInt(botonPresionado.getText().toString())==contadorBotones){
-            botonPresionado.setEnabled(false);
-            contadorBotones++;
+            //Creamos una instancia de la clase fragmentoLogin
+                FragmentoLogin alertDialogLogin = new FragmentoLogin();
 
-            if(contadorBotones==5){
+            //No dejamos que se cierre el dialogo con back
+                alertDialogLogin.setCancelable(false);
 
-                tarea.cancel(false);
-                contadorBotones=1;
-                llamaTarea(numDificultad);
+            //Nos suscribimos al evento FragmentoDialogoListener
+                alertDialogLogin.setFragmentoLoginListener(this);
 
-            }
-
+            //Mostramos el dialogo del login.
+                alertDialogLogin.show(getFragmentManager(),null);
 
         }
 
-    }
+    //Metodos FragmentoLogin
 
     @Override
     public void nivel(int dificultad) {
@@ -166,19 +190,18 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
     }
 
     @Override
-    public void llamaTarea(int dificultad) {
+    public void llamaTarea(int dificultad, int masDificultad) {
+
+        int tiempo=dificultad*20;
+        //tiempo = tiempo-masDificultad;
 
         //Ejecutamos la tarea
             tarea = new TareaBotones();
-            tarea.execute(dificultad*20);
+            tarea.execute(tiempo);
 
     }
 
-    @Override
-    public void onBackPressed() {
-
-
-    }
+    //Metodo para poner los numeros a los botones
 
     private void numerarBotones(ArrayList<Integer>numeros){
 
@@ -191,6 +214,34 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnC
             botones.get(i).setText(String.valueOf(numeros.get(i)));
 
         }
+
+    }
+
+    //Metodos DialogoGameOver
+
+    @Override
+    public void reiniciar() {
+
+
+        llamaLogin();
+        contadorBotones=1;
+        nivelFase=1;
+        aumentoDificultad=0;
+
+    }
+
+    @Override
+    public void salir() {
+
+        finish();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        tarea.cancel(false);
+        finish();
 
     }
 }

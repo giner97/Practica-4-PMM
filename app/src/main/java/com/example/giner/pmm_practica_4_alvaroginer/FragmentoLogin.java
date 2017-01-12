@@ -86,7 +86,7 @@ public class FragmentoLogin extends DialogFragment implements View.OnClickListen
 
                 escuchador.nivel(dificultad);
                 escuchador.nick(nicknameCadena);
-                escuchador.llamaTarea(dificultad);
+                escuchador.llamaTarea(dificultad,0);
                 dismiss();
 
             }
@@ -96,6 +96,7 @@ public class FragmentoLogin extends DialogFragment implements View.OnClickListen
         else if(v.getId()==R.id.volver){
 
             escuchador.botonPulsadoVolver();
+            dismiss();
 
         }
 
@@ -109,7 +110,7 @@ public class FragmentoLogin extends DialogFragment implements View.OnClickListen
             public void nivel(int dificultad);
             public void nick(String nickname);
             public void botonPulsadoVolver();
-            public void llamaTarea(int dificultad);
+            public void llamaTarea(int dificultad, int masDificultad);
 
         }
 

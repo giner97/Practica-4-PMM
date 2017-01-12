@@ -26,12 +26,15 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:paddingBottom="100dp"
-        android:layout_below="@+id/nickname"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content">
 
             <Button
@@ -79,6 +82,16 @@
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
             android:id="@+id/carga" />
+
+        <TextView
+            android:text="Nivel 1"
+            android:layout_width="match_parent"
+            android:textSize="30dp"
+            android:textColor="@android:color/holo_green_light"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:id="@+id/level" />
     </LinearLayout>
 
 </RelativeLayout>
